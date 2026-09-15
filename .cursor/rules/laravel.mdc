@@ -1,0 +1,22 @@
+---
+description: Laravel backend conventions
+globs:
+  - "**/*.php"
+alwaysApply: false
+---
+
+# LARAVEL CONVENTIONS
+
+- Use artisan commands: `php artisan make:model`, `make:controller`, etc.
+- In Laravel 11+, commands in `app/Console/Commands/` auto-register
+- Config over env: Use `config('app.name')` NOT `env('APP_NAME')`
+- Eager load relationships to avoid N+1:
+
+```php
+$users = User::with('posts')->get();
+```
+
+- Use soft deletes for models when appropriate
+- Form Requests for validation
+- Route Model Binding for cleaner controllers
+- Use transactions for multi-step database operations

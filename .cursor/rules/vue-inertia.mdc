@@ -1,0 +1,49 @@
+---
+description: Vue + Inertia.js patterns
+globs:
+  - "**/*.vue"
+alwaysApply: false
+---
+
+# VUE + INERTIA PATTERNS
+
+## Component Structure
+
+- All page components in `resources/js/Pages/`
+- Reusable components in `resources/js/Components/`
+- Layouts in `resources/js/Layouts/`
+- Use Composition API with `<script setup>`
+
+## Inertia Routing
+
+```php
+// Backend (routes/web.php or controller)
+return Inertia::render('Users/Index', [
+    'users' => User::all(),
+]);
+```
+
+```vue
+<!-- Frontend (resources/js/Pages/Users/Index.vue) -->
+<script setup>
+defineProps({ users: Array });
+</script>
+```
+
+## Navigation
+
+Use Inertia `<Link>` — not plain `<a href>` for internal routes.
+
+## Forms
+
+Use `useForm` from `@inertiajs/vue3` for submissions to Laravel routes.
+
+## Access Shared Data
+
+```vue
+<template>
+    <div v-if="$page.props.flash.message">
+        {{ $page.props.flash.message }}
+    </div>
+</template>
+```
