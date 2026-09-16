@@ -26,7 +26,7 @@ defineProps({
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="image">
-                                    <img :src="event.image" :alt="event.title" />
+                                    <img :src="event.image" alt="" />
                                 </div>
                             </div>
                             <div class="col-lg-9">
@@ -48,9 +48,7 @@ defineProps({
                                         <h6>${{ event.price }}</h6>
                                     </li>
                                 </ul>
-                                <a :href="event.url">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
+                                <a :href="event.url"><i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>

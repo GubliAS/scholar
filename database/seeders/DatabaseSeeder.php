@@ -28,8 +28,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BannerSlideSeeder::class,
             ServiceSeeder::class,
+            AboutFaqSeeder::class,
             CourseSeeder::class,
+            FunFactSeeder::class,
             TeamMemberSeeder::class,
+            TestimonialSeeder::class,
             EventSeeder::class,
         ]);
     }

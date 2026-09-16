@@ -4,8 +4,11 @@ import AppHeader from '@/Components/Partials/AppHeader.vue';
 import AppFooter from '@/Components/Partials/AppFooter.vue';
 import BannerCarousel from '@/Components/Home/BannerCarousel.vue';
 import ServicesSection from '@/Components/Home/ServicesSection.vue';
+import AboutSection from '@/Components/AboutSection.vue';
 import CoursesSection from '@/Components/CoursesSection.vue';
+import FunFactsSection from '@/Components/FunFactsSection.vue';
 import TeamSection from '@/Components/TeamSection.vue';
+import TestimonialsSection from '@/Components/TestimonialsSection.vue';
 import EventsSection from '@/Components/EventsSection.vue';
 import RegisterSection from '@/Components/RegisterSection.vue';
 
@@ -18,11 +21,23 @@ defineProps({
         type: Array,
         default: () => [],
     },
+    aboutFaqs: {
+        type: Array,
+        default: () => [],
+    },
     courses: {
         type: Array,
         default: () => [],
     },
+    funFacts: {
+        type: Array,
+        default: () => [],
+    },
     teamMembers: {
+        type: Array,
+        default: () => [],
+    },
+    testimonials: {
         type: Array,
         default: () => [],
     },
@@ -55,8 +70,11 @@ onMounted(() => {
         <AppHeader />
         <BannerCarousel :slides="slides" />
         <ServicesSection :services="services" />
+        <AboutSection :faqs="aboutFaqs" />
         <CoursesSection :courses="courses" />
+        <FunFactsSection :facts="funFacts" />
         <TeamSection :members="teamMembers" />
+        <TestimonialsSection :testimonials="testimonials" />
         <EventsSection :events="events" />
         <RegisterSection />
         <AppFooter />

@@ -23,7 +23,7 @@ php artisan db:seed
 npm install
 ```
 
-`migrate` creates the tables. `db:seed` inserts sample Home/Services/Courses/Team/Events rows. The SQLite file is gitignored, so every machine needs both commands.
+`migrate` creates the tables. `db:seed` inserts sample landing-page rows. The SQLite file is gitignored, so every machine needs both commands.
 
 Run both dev servers:
 
@@ -59,8 +59,11 @@ Home data comes from `HomeController` querying:
 
 - Banner slides → `banner_slides`
 - Services → `services`
+- About accordion → `about_faqs`
 - Courses → `courses`
+- Fun facts → `fun_facts`
 - Team → `team_members`
+- Testimonials → `testimonials`
 - Events → `events`
 
 Register Now is `RegisterSection.vue` (form posts to `/register-lead`). Footer is `AppFooter.vue`.
@@ -70,7 +73,7 @@ Register Now is `RegisterSection.vue` (form posts to `/register-lead`). Footer i
 ```
 scholar/
 ├── app/Http/Controllers/     # Per-page backend logic + Inertia::render()
-├── app/Models/               # Eloquent models (BannerSlide, Service, Course, TeamMember, Event)
+├── app/Models/               # Eloquent models for landing-page sections
 ├── database/migrations/      # Table definitions
 ├── database/seeders/         # Sample rows (not the SQLite file itself)
 ├── public/assets/            # Template static files (css, js, img, fonts)
