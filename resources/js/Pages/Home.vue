@@ -5,6 +5,7 @@ import BannerCarousel from '@/Components/Home/BannerCarousel.vue';
 import ServicesSection from '@/Components/Home/ServicesSection.vue';
 import CoursesSection from '@/Components/CoursesSection.vue';
 import TeamSection from '@/Components/TeamSection.vue';
+import RegisterSection from '@/Components/RegisterSection.vue';
 
 defineProps({
     slides: {
@@ -50,9 +51,9 @@ onMounted(() => {
         <ServicesSection :services="services" />
         <CoursesSection :courses="courses" />
         <TeamSection :members="teamMembers" />
+        <RegisterSection />
 
         <!-- Teammates: add remaining index.html sections here with matching ids -->
         <!-- id="events"   Events -->
-        <!-- id="contact"  Register / Contact -->
     </div>
 </template>
