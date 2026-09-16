@@ -3,6 +3,8 @@ import { onMounted, ref } from 'vue';
 import AppHeader from '@/Components/Partials/AppHeader.vue';
 import BannerCarousel from '@/Components/Home/BannerCarousel.vue';
 import ServicesSection from '@/Components/Home/ServicesSection.vue';
+import CoursesSection from '@/Components/CoursesSection.vue';
+import TeamSection from '@/Components/TeamSection.vue';
 
 defineProps({
     slides: {
@@ -10,6 +12,14 @@ defineProps({
         default: () => [],
     },
     services: {
+        type: Array,
+        default: () => [],
+    },
+    courses: {
+        type: Array,
+        default: () => [],
+    },
+    teamMembers: {
         type: Array,
         default: () => [],
     },
@@ -38,10 +48,10 @@ onMounted(() => {
         <AppHeader />
         <BannerCarousel :slides="slides" />
         <ServicesSection :services="services" />
+        <CoursesSection :courses="courses" />
+        <TeamSection :members="teamMembers" />
 
         <!-- Teammates: add remaining index.html sections here with matching ids -->
-        <!-- id="courses"  Courses -->
-        <!-- id="team"     Team -->
         <!-- id="events"   Events -->
         <!-- id="contact"  Register / Contact -->
     </div>

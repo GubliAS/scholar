@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
+use App\Models\TeamMember;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class HomeController extends Controller
 {
     /**
-     * Show the public landing page (Home + Services for this assignment).
+     * Show the public landing page.
      */
     public function index(): Response
     {
         return Inertia::render('Home', [
+            'courses' => Course::query()->orderBy('id')->get(),
+            'teamMembers' => TeamMember::query()->orderBy('id')->get(),
             'slides' => [
                 [
                     'item_class' => 'item-1',
