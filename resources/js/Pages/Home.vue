@@ -1,10 +1,12 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import AppHeader from '@/Components/Partials/AppHeader.vue';
+import AppFooter from '@/Components/Partials/AppFooter.vue';
 import BannerCarousel from '@/Components/Home/BannerCarousel.vue';
 import ServicesSection from '@/Components/Home/ServicesSection.vue';
 import CoursesSection from '@/Components/CoursesSection.vue';
 import TeamSection from '@/Components/TeamSection.vue';
+import EventsSection from '@/Components/EventsSection.vue';
 import RegisterSection from '@/Components/RegisterSection.vue';
 
 defineProps({
@@ -21,6 +23,10 @@ defineProps({
         default: () => [],
     },
     teamMembers: {
+        type: Array,
+        default: () => [],
+    },
+    events: {
         type: Array,
         default: () => [],
     },
@@ -51,9 +57,8 @@ onMounted(() => {
         <ServicesSection :services="services" />
         <CoursesSection :courses="courses" />
         <TeamSection :members="teamMembers" />
+        <EventsSection :events="events" />
         <RegisterSection />
-
-        <!-- Teammates: add remaining index.html sections here with matching ids -->
-        <!-- id="events"   Events -->
+        <AppFooter />
     </div>
 </template>

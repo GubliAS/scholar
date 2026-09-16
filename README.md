@@ -8,6 +8,7 @@ Laravel + Vue 3 + Inertia base project for converting an HTML/CSS/JS web templat
 - Vue 3 (Composition API / `<script setup>`)
 - Inertia.js
 - Vite
+- SQLite (local)
 
 ## Quick start
 
@@ -18,8 +19,11 @@ cp .env.example .env   # skip if .env already exists
 php artisan key:generate
 touch database/database.sqlite   # Windows: New-Item database/database.sqlite -ItemType File
 php artisan migrate
+php artisan db:seed
 npm install
 ```
+
+`migrate` creates the tables. `db:seed` inserts sample Home/Services/Courses/Team/Events rows. The SQLite file is gitignored, so every machine needs both commands.
 
 Run both dev servers:
 
@@ -30,6 +34,19 @@ npm run dev
 
 Visit http://127.0.0.1:8000
 
+## After every `git pull`
+
+Landing-page data lives in the database, not in Git. After pulling, run:
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+Then refresh the browser (restart servers only if they were not already running).
+
+If a section heading shows but cards/slides are missing, the tables exist and the seed was skipped.
+
 ## Routes (section ownership)
 
 | Route | Page | Vue file | Owner section |
@@ -38,11 +55,24 @@ Visit http://127.0.0.1:8000
 | `/dashboard` | Dashboard | `resources/js/Pages/Dashboard/Index.vue` | dashboard.html |
 | `/profile` | Profile | `resources/js/Pages/Profile.vue` | profile.html |
 
+Home data comes from `HomeController` querying:
+
+- Banner slides → `banner_slides`
+- Services → `services`
+- Courses → `courses`
+- Team → `team_members`
+- Events → `events`
+
+Register Now is `RegisterSection.vue` (form posts to `/register-lead`). Footer is `AppFooter.vue`.
+
 ## Project structure
 
 ```
 scholar/
 ├── app/Http/Controllers/     # Per-page backend logic + Inertia::render()
+├── app/Models/               # Eloquent models (BannerSlide, Service, Course, TeamMember, Event)
+├── database/migrations/      # Table definitions
+├── database/seeders/         # Sample rows (not the SQLite file itself)
 ├── public/assets/            # Template static files (css, js, img, fonts)
 ├── resources/js/
 │   ├── Pages/                # Inertia pages (one per route)
@@ -68,12 +98,13 @@ scholar/
 
 - Follow `.cursor/rules/` (Npontu internship standards).
 - Pages in `resources/js/Pages/`, shared UI in `resources/js/Components/`.
-- Backend data for each page lives in the matching controller method.
+- Backend data for each page lives in the matching controller method (loaded from the database).
 - Use `@/` import alias for `resources/js/` (e.g. `@/Layouts/DashboardLayout.vue`).
 
 ## Team workflow
 
-1. Pull latest `scholar` branch.
-2. Work only on your assigned page/components.
-3. Do not commit `.env`, `vendor/`, or `node_modules/`.
-4. Test with `php artisan serve` + `npm run dev` before pushing.
+1. Pull latest `main` branch.
+2. Run `php artisan migrate` then `php artisan db:seed`.
+3. Work only on your assigned page/components.
+4. Do not commit `.env`, `vendor/`, `node_modules/`, or `database/*.sqlite`.
+5. Test with `php artisan serve` + `npm run dev` before pushing.
